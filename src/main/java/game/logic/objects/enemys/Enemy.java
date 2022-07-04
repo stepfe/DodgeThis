@@ -9,7 +9,7 @@ public class Enemy extends Ship {
         super(x, y, hp, speed, bulletToShot);
     }
 
-    void move(){
+    public void move(){
         //TODO логика врага
     }
 }

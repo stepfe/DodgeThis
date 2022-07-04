@@ -10,12 +10,7 @@ public class Bullet extends GameObject{
         super(x, y);
         this.damage = damage;
         this.speed = speed;
-    }
-
-    private void calculateSpeed(int targetX, int targetY){
-//TODO::Расчет состовляющих скорости
-//        speedX = (targetX - getX())/speed;
-//        speedY = (targetY - getY())/speed;
+        calculateSpeed(targetX, targetY);
     }
 
 
@@ -27,8 +22,18 @@ public class Bullet extends GameObject{
         return damage;
     }
 
-    void move(){
+    public void move(){
         setX(getX() + speedX);
         setY(getY() + speedY);
+    }
+
+    private void calculateSpeed(int targetX, int targetY){
+
+        int x = (targetX - getX())/speed;
+        int y = (targetY - getY())/speed;
+        int z = (int)Math.sqrt(x * x + y * y);
+
+        speedY = speed * y / z;
+        speedX = speed * x / z;
     }
 }

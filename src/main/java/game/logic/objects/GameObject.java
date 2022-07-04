@@ -1,8 +1,8 @@
 package game.logic.objects;
 
 public class GameObject {
-    private int x;
-    private int y;
+    protected int x;
+    protected int y;
 
     public GameObject(int x, int y) {
         this.x = x;

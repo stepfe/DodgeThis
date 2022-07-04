@@ -18,7 +18,7 @@ public class Ship extends GameObject{
         this.listeners = new LinkedList<ShootListener>();
     }
 
-    void shoot(){
+    public void shoot(){
         //TODO разные типы пуль
         Bullet bullet = new Bullet(getX(), getY(), target.getX(), target.getY()
                 , bulletToShot.getSpeed()
