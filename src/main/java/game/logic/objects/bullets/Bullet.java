@@ -1,16 +1,18 @@
-package game.logic.objects;
+package game.logic.objects.bullets;
 
-public class Bullet extends GameObject{
+import game.logic.objects.GameObject;
+
+public class Bullet extends GameObject {
     private int damage;
     private int speed;
     private int speedX;
     private int speedY;
 
-    public Bullet(int x, int y, int targetX, int targetY, int speed, int damage) {
-        super(x, y);
+    public Bullet(GameObject startPosition, GameObject targetPosition, int speed, int damage) {
+        super(startPosition.getX(), startPosition.getY());
         this.damage = damage;
         this.speed = speed;
-        calculateSpeed(targetX, targetY);
+        calculateSpeed(targetPosition.getX(), targetPosition.getY());
     }
 
 
