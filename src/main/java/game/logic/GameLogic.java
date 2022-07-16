@@ -1,48 +1,86 @@
 package game.logic;
 
-import game.logic.objects.Bullet;
+import game.logic.objects.DrawableObject;
+import game.logic.objects.bullets.BaseBullet;
 import game.logic.objects.Player;
 import game.logic.objects.ShootListener;
-import game.logic.objects.enemys.Enemy;
+import game.logic.objects.bullets.BaseBulletFactory;
+import game.logic.objects.enemys.BaseEnemy;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+/**
+ * Игровая логика совмещающая в себе все игровые объекты и налаживающая их взаимодействие
+ */
 public class GameLogic implements ShootListener {
 
     private Player player;
-    private List<Enemy> enemies;
-    private List<Bullet> bullets;
-    private Level level;
-    private int score;
-    private int enemyRemains;
+    private Set<BaseEnemy> enemies;
+    private Set<BaseBullet> bullets;
+    private ImageLoader imageLoader;
 
-    //TODO реализация методов
-
-    public void start(){
-
+    public GameLogic() {
+        imageLoader = ImageLoader.getInstance();
+        clearObjects();
+        player = new Player(500, 500, 10, 5, new BaseBulletFactory(), imageLoader.getPlayerImage());
     }
 
-    public void moveEverything(){
-
+    /**
+     * Шаг игрового цикла
+     */
+    public void nextGameIteration() {
+        moveBullets();
+        moveEnemies();
     }
 
-    public void addEnemy(){
-
+    /**
+     * Добавление врага на игровую сцену
+     * @param enemy новый враг
+     */
+    public void addEnemy(BaseEnemy enemy) {
+        enemies.add(enemy);
     }
 
-    private void moveEnemys(){
-
+    @Override
+    public void onShoot(BaseBullet bullet) {
+        bullets.add(bullet);
     }
 
-    private void moveBullets(){
-
+    /**
+     * @return все враги на игровой сцене
+     */
+    public Set<BaseEnemy> getAllEnemies() {
+        return enemies;
     }
 
-    public void movePlayer(){
+    /**
+     * @return все игровые объекты для рисования
+     */
+    public Set<DrawableObject> getAllDrawableObjects() {
+        Set<DrawableObject> drawableObjects = new HashSet<>();
 
+        drawableObjects.addAll(enemies);
+        drawableObjects.addAll(bullets);
+        drawableObjects.add(player);
+
+        return drawableObjects;
     }
 
-    public void onShoot(Bullet bullet) {
+    private void moveEnemies(){
+        for (BaseEnemy enemy : enemies) {
+            enemy.move();
+        }
+    }
 
+    private void moveBullets() {
+        for (BaseBullet bullet : bullets) {
+            bullet.move();
+        }
+    }
+
+    private void clearObjects() {
+        enemies = new HashSet<>();
+        bullets = new HashSet<>();
     }
 }
