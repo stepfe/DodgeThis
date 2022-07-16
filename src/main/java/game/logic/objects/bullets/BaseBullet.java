@@ -1,15 +1,21 @@
 package game.logic.objects.bullets;
 
+import game.logic.objects.DrawableObject;
 import game.logic.objects.GameObject;
 
-public class Bullet extends GameObject {
+import java.awt.image.BufferedImage;
+
+/**
+ * Класс пули
+ */
+public class Bullet extends DrawableObject {
     private int damage;
     private int speed;
     private int speedX;
     private int speedY;
 
-    public Bullet(GameObject startPosition, GameObject targetPosition, int speed, int damage) {
-        super(startPosition.getX(), startPosition.getY());
+    public Bullet(GameObject startPosition, GameObject targetPosition, int speed, int damage, BufferedImage image) {
+        super(startPosition.getX(), startPosition.getY(), image);
         this.damage = damage;
         this.speed = speed;
         calculateSpeed(targetPosition.getX(), targetPosition.getY());
@@ -24,6 +30,9 @@ public class Bullet extends GameObject {
         return damage;
     }
 
+    /**
+     * Движение пули в заданном направлении
+     */
     public void move(){
         setX(getX() + speedX);
         setY(getY() + speedY);
