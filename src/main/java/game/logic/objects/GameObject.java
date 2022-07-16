@@ -1,5 +1,8 @@
 package game.logic.objects;
 
+/**
+ * Базовый класс всех физических игровых объектов (обладающих координатой)
+ */
 public class GameObject {
     protected int x;
     protected int y;

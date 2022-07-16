@@ -8,13 +8,13 @@ import java.awt.image.BufferedImage;
 /**
  * Класс пули
  */
-public class Bullet extends DrawableObject {
+public class BaseBullet extends DrawableObject {
     private int damage;
     private int speed;
     private int speedX;
     private int speedY;
 
-    public Bullet(GameObject startPosition, GameObject targetPosition, int speed, int damage, BufferedImage image) {
+    public BaseBullet(GameObject startPosition, GameObject targetPosition, int speed, int damage, BufferedImage image) {
         super(startPosition.getX(), startPosition.getY(), image);
         this.damage = damage;
         this.speed = speed;
