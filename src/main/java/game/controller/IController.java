@@ -1,4 +1,9 @@
 package game.controller;
 
-public interface IController {
+import java.awt.event.KeyListener;
+
+/**
+ * Интерфейс контроллера
+ */
+public interface IController extends KeyListener {
 }
